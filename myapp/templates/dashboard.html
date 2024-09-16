@@ -1,0 +1,40 @@
+<!-- myapp/templates/dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Dashboard</h1>
+    
+    <!-- ChatGPT Assistant Form -->
+    <form method="post" action="{% url 'dashboard' %}">
+        {% csrf_token %}
+        
+        <!-- user_input Textarea -->
+        <label for="user_input">Show me your CV:</label>
+        <textarea id="user_input" name="user_input" rows="5" cols="50" required></textarea>
+        
+        <p>
+        <!-- user_target Textarea -->
+        <label for="user_target">Job description:</label>
+        <textarea id="user_target" name="user_target" rows="5" cols="50" required></textarea>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+
+    <!-- Display Assistant Response -->
+    {% if response %}
+        <h2>Assistant Response:</h2>
+        <pre>{{ response }}</pre>
+        <h3>Model Used:</h3>
+        <pre>{{ model }}</pre>
+    {% endif %}
+
+</body>
+</html>
